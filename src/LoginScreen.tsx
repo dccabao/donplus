@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, TextInput, Button, Text } from 'react-native';
-
+import { StyleSheet, View, TextInput, Button, Text, Alert } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
 interface Credentials {
   email: string;
   password: string;
@@ -24,7 +25,7 @@ const LoginScreen = () => {
       const { accessToken } = response.data;
       await AsyncStorage.setItem('accessToken', accessToken);
     } catch (error) {
-      Alert.alert('Login failed', error.message);
+      Alert.alert('Login failed', (error as Error).message);
     }
   }
 
